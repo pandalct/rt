@@ -52,7 +52,7 @@
     CheckRight     => "CreateAsset",
     %ARGS,
     ObjectType     => "Catalog",
-    CacheNeedsUpdate => (RT::Catalog->CacheNeedsUpdate ? time() : 0),
+    CacheNeedsUpdate => RT::Catalog->CacheNeedsUpdate,
     Default        => $Default,
     &>
 <%args>

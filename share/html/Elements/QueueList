@@ -67,7 +67,7 @@ my $cache_key = SetObjectSessionCache(
     ObjectType => 'RT::Queue',
     CheckRight => 'ShowTicket',
     ShowAll => 0,
-    CacheNeedsUpdate => (RT->System->QueueCacheNeedsUpdate ? time() : 0),
+    CacheNeedsUpdate => RT->System->QueueCacheNeedsUpdate,
     Exclude => $unwanted,
 );
 
