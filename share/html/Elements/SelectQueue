@@ -53,7 +53,7 @@
     ObjectType       => "Queue",
     CheckRight       => $CheckQueueRight,
     ShowAll          => $ShowAllQueues,
-    CacheNeedsUpdate => RT->System->QueueCacheNeedsUpdate,
+    CacheNeedsUpdate => (RT->System->QueueCacheNeedsUpdate ? time() : 0),
     &>
 %}
 <%args>
