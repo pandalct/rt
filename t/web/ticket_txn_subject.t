@@ -30,6 +30,7 @@ diag "create a ticket via the web";
         with_fields => {
             Subject => Encode::decode("UTF-8",'bad subject #2‽'),
         },
+        button      => 'SubmitTicket',
     }, 'create ticket');
     $m->content_contains(Encode::decode("UTF-8",'bad subject #2‽'), 'correct subject');
     push @tickets, 2;
@@ -44,6 +45,7 @@ diag "create a ticket via the web without a unicode subject";
         with_fields => {
             Subject => 'a fine subject #3',
         },
+        button      => 'SubmitTicket',
     }, 'create ticket');
     $m->content_contains('a fine subject #3', 'correct subject');
     push @tickets, 3;

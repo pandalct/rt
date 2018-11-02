@@ -95,7 +95,7 @@ for my $try (@form_tries) {
     $m->goto_create_ticket(1);
     $m->form_name('TicketCreate');
     $m->set_fields(%$try);
-    $m->submit();
+    $m->click('SubmitTicket');
     $m->form_name('TicketCreate');
     for my $field (keys %$try) {
         is(

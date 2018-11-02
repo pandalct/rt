@@ -19,6 +19,7 @@ for my $quick (1, 0) {
             Subject => "The Plants",
             Content => "Please water them.",
         },
+        $quick ? () : ( button => 'SubmitTicket' ),
     }, "Submitted new ticket");
 
     my $id = RT::Test->last_ticket->id;

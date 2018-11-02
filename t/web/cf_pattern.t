@@ -38,6 +38,7 @@ for my $page ("/Ticket/Create.html?Queue=1", "/Ticket/Modify.html?id=".$ticket->
             $cfinput            => "too many",
             "${cfinput}-Magic" => "1",
         },
+        $page =~ /Create/ ? ( button => 'SubmitTicket' ) : (),
     });
     $m->content_contains("Input must match [Digits]");
     $m->content_contains("cfinvalidfield");
@@ -47,6 +48,7 @@ for my $page ("/Ticket/Create.html?Queue=1", "/Ticket/Modify.html?id=".$ticket->
             $cfinput            => "42",
             "${cfinput}-Magic" => "1",
         },
+        $page =~ /Create/ ? ( button => 'SubmitTicket' ) : (),
     });
 
     if ($page =~ /Create/) {
