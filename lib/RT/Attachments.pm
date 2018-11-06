@@ -287,15 +287,26 @@ sub ReplaceAttachments {
         SUBCLAUSE       => 'Attachments',
     ) unless !$args{Content};
 
+    my %tickets;
     while (my $attachment = $self->Next) {
+        my $content_replaced;
         if ( $args{Headers} ) {
             my ($ret, $msg) = $attachment->ReplaceHeaders(Search => $args{Search}, Replacement => $args{Replacement});
             RT::Logger->error($msg) unless $ret;
+            $content_replaced = $ret;
         }
         if ( $args{Content} ) {
             my ($ret, $msg) = $attachment->ReplaceContent(Search => $args{Search}, Replacement => $args{Replacement});
             RT::Logger->error($msg) unless $ret;
+            $content_replaced = $ret || $content_replaced;
         }
+        my $ticket = $attachment->TransactionObj->TicketObj;
+        $tickets{$ticket->Id} = $ticket if $content_replaced;
+    }
+    foreach my $ticket (values %tickets){
+        $ticket->_NewTransaction(
+            Type     => "Munge",
+        );
     }
     return;
 }
