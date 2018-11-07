@@ -288,18 +288,21 @@ sub ReplaceAttachments {
     ) unless !$args{Content};
 
     my %tickets;
+    my ($ret, $msg);
     while (my $attachment = $self->Next) {
         my $content_replaced;
         if ( $args{Headers} ) {
-            my ($ret, $msg) = $attachment->ReplaceHeaders(Search => $args{Search}, Replacement => $args{Replacement});
+            ($ret, $msg) = $attachment->ReplaceHeaders(Search => $args{Search}, Replacement => $args{Replacement});
             RT::Logger->error($msg) unless $ret;
             $content_replaced = $ret;
         }
+        return ($ret, $msg) unless $ret;
         if ( $args{Content} ) {
-            my ($ret, $msg) = $attachment->ReplaceContent(Search => $args{Search}, Replacement => $args{Replacement});
+            ($ret, $msg) = $attachment->ReplaceContent(Search => $args{Search}, Replacement => $args{Replacement});
             RT::Logger->error($msg) unless $ret;
             $content_replaced = $ret || $content_replaced;
         }
+        return ($ret, $msg) unless $ret;
         my $ticket = $attachment->TransactionObj->TicketObj;
         $tickets{$ticket->Id} = $ticket if $content_replaced;
     }
@@ -308,7 +311,8 @@ sub ReplaceAttachments {
             Type     => "Munge",
         );
     }
-    return;
+    my $count = scalar keys %tickets;
+    return (1, "Updated $count ticket's attachment content");
 }
 
 RT::Base->_ImportOverlays();
