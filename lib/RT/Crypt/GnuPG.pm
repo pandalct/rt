@@ -1810,6 +1810,29 @@ sub ImportKey {
     );
 }
 
+sub ReceiveKey {
+    my $self = shift;
+    my $key  = shift;
+
+    return $self->CallGnuPG(
+        Command     => "recv_keys",
+        CommandArgs => [ '--', $key ],
+    );
+}
+
+sub TrustKey {
+    my $self  = shift;
+    my $key   = shift;
+    my $level = shift;
+
+    $level++; # the level format in --import-ownertrust input is +1
+
+    return $self->CallGnuPG(
+        Command => "--import-ownertrust",
+        Content => "$key:$level:\n",
+    );
+}
+
 sub GnuPGPath {
     state $cache = RT->Config->Get('GnuPG')->{'GnuPG'};
     $cache = $_[1] if @_ > 1;
