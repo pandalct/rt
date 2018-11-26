@@ -1,0 +1,19 @@
+=head1 Working with RT
+
+Request Tracker (RT) has a number of use cases and features. In this guide, we will focus on working with RT in the user interface rather than working with RT via email.
+
+=head2 Creating a Ticket
+
+There are several ways to create a ticket in RT. From the homepage, "RT at a glance", you have a couple of options. The first, is to click on the "New ticket in" on the top right, selecting the desired queue from the dropdown. This will bring you to the Ticket Create page where you can add detailed information on the ticket, including a subject and a message. The available fields can be customized by your RT administrator. You can also add attachments to the ticket by either dragging and dropping or clicking to select a file from your computer. Another way tickets can be created is by using the "Quick ticket creation" portlet on "RT at a glance" (Note that this may not be available by default if your RT administrator removed it). Rather than jumping to an additional page, this portlet allows to add the most prominent information on a ticket without leaving your home page.
+
+With the proper rights, a ticket can also be created by emailing the corresponding email address set by an RT administrator.
+
+=head2 Actions
+
+=head3 Reply/Comment
+
+Users are able to either comment or reply on a ticket based on their needs. A comment is used to add a note to a ticket that is not sent out to the ticket Requestor. A reply however, is sent to the Requestor and triggers each correspondence scrip. To distinguish the two on the Ticket Update page, the message box for Comments, is yellow, whereas the message box for Replies, is red.
+
+In order to make it easier to reply/comment on a ticket, a feature as of 4.6 has been added that allows you to quote any text on the ticket display page into your comment or reply. To utilize this feature, simply highlight the content you would like inserted in you message, then click on Comment/Reply. You may click on Comment/Reply from either the Actions menu or directly on the transaction you'd like. This will bring you to the ticket update page and you will find you selected text already in the message box.
+
+##add images
